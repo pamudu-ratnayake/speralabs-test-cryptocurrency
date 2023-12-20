@@ -34,10 +34,8 @@ function SignUpPage(props) {
   });
 
   const onLogin = (values) => {
-    console.log("login click", values);
     axios.post(`http://localhost:8070/auth-user/login`, values)
     .then((res) => {
-        console.log("login done", res.data);
         localStorage.setItem("profile", JSON.stringify(res.data));
         navigate('/home');
     })
@@ -48,12 +46,11 @@ function SignUpPage(props) {
   };
   
   const onSignup = (values) => {
-    console.log("signup click", values);
     if (values.password === values.signupConPassword) {
         axios.post(`http://localhost:8070/auth-user/signup`, values)
         .then((res) => {
-            console.log('sighup=====> ', res.data);
             localStorage.setItem("profile", JSON.stringify(res.data));
+            setActiveTab("#login")
         })
         .catch((err) => {
             console.error(err);
@@ -117,7 +114,7 @@ function SignUpPage(props) {
                       </Form.Group>
                     </Row>
 
-                    <Button type="submit">Submit form</Button>
+                    <Button type="submit">Log In</Button>
                   </Form>
                 )}
               </Formik>
@@ -209,7 +206,7 @@ function SignUpPage(props) {
                     </Row>
                     
 
-                    <Button type="submit">Submit form</Button>
+                    <Button type="submit">Sign Up</Button>
                   </Form>
                 )}
               </Formik>
